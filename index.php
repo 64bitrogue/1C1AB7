@@ -8,10 +8,10 @@ $book = null;
 if (isset($_GET['book']) && strlen($_GET['book']) > 0) {
     $book = sanitizeInput($_GET['search']);
 
-    $query = "SELECT * FROM books WHERE id LIKE '%$book%' OR title LIKE '%$book%' OR author LIKE '%$book%'";
+    $query = "SELECT * FROM books WHERE id LIKE '%$book%' OR title LIKE '%$book%' OR author LIKE '%$book%' ORDER BY publication DESC";
 
 } else {
-    $query = "SELECT * FROM books";
+    $query = "SELECT * FROM books ORDER BY publication DESC";
 }
 
 $books = mysqli_query($conn, $query);
@@ -60,7 +60,7 @@ $books = mysqli_query($conn, $query);
                             <td><?= date_format(date_create($row['publication']), 'F j, Y') ?></td>
                             <td><?= $row['quantity'] ?></td>
                             <td>
-                                <a href="editbooks.php?id=<?= $row['id'] ?>">Edit</a>
+                                <a href="editbook.php?id=<?= $row['id'] ?>">Edit</a>
                                 <form action="deletebook.php" method="post">
                                     <input type="hidden" name="id" id="id" value="<?= $row['id'] ?>">
                                     <button type="submit" name="delete">Delete</button>

@@ -11,8 +11,7 @@ if (isset($_POST['create'])) {
     $username = sanitizeInput($_POST['username']);
 
     // Validation
-
-    // Title
+    // Username
     if (empty($username)) {
         $errors['username'] = "Please specify the username.";
     } else if (preg_match("/[^a-zA-Z0-9]/", $username)) {
